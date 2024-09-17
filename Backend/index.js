@@ -17,7 +17,6 @@ app.post('/todos', async (req, res) => {
         return res.status(400).json({message: "Invalid inputs"})
     }
 
-    
     const { title, description} = req.body
 
     // pushing data to mongodb
