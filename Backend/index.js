@@ -1,5 +1,5 @@
 const express = require('express')
-const { createTodoSchema, updateTodoSchema} = require('./types')
+const { createTodoSchema, updateTodoSchema} = require('./validation')
 const { Todos } = require('./db')
 
 const app = express()
