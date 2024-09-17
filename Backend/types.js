@@ -11,16 +11,16 @@ const zod = require('zod')
     }
 */
 
-const createTodo = zod.object({
+const createTodoSchema = zod.object({
     title: zod.string(),
     desription: zod.string()
 })
 
-const updateTodo = zod.object({
+const updateTodoSchema = zod.object({
     id: zod.string()
 })
 
 module.exports = {
-    createTodo,
-    updateTodo
+    createTodoSchema,
+    updateTodoSchema
 }
