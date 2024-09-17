@@ -1,10 +1,16 @@
 const express = require('express')
 const { createTodoSchema, updateTodoSchema} = require('./validation')
 const { Todos } = require('./db')
+const cors = require('cors')
 
 const app = express()
 
 app.use(express.json())
+
+// leave it empty to allow from everywhere
+app.use(cors({
+    origin: "http://localhost:5173"
+}))
 
 app.post('/todos', async (req, res) => {
     // Input validation using zod
