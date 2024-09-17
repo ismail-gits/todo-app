@@ -42,6 +42,8 @@ app.get('/todos', async (req, res) => {
 })
 
 app.put('/completed', async (req, res) => {
+    console.log("hello there")
+
     // Input validation using zod
     const inputValidation = updateTodoSchema.safeParse(req.body)
 

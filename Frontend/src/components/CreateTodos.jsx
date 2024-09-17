@@ -5,7 +5,6 @@ export function CreateTodo() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
-
     return (
         <div>
             <input type="text" placeholder="Title" className="input-field" id="title" onChange={(e) => {
@@ -32,7 +31,11 @@ export function CreateTodo() {
                 })
                 .then(async (response) => {
                     const json = await response.json()
-                    alert("Todo added")
+                    alert("Todo Added!")
+                })
+                .catch((err) => {
+                    console.log(err)
+                    alert("Todo adding failed!")
                 })
             }} className="button">Add Todo</button>
         </div>
