@@ -8,12 +8,16 @@ app.use(express.json())
 
 app.post('/todos', async (req, res) => {
     // Input validation using zod
-    const inputValidation = createTodoSchema.safeParse(req.body)
+    const input = req.body
+    console.log(req.body)
+    const inputValidation = createTodoSchema.safeParse(input)
 
     if (!inputValidation.success) {
+        console.log(inputValidation.error.errors)
         return res.status(400).json({message: "Invalid inputs"})
     }
 
+    
     const { title, description} = req.body
 
     // pushing data to mongodb
@@ -41,10 +45,14 @@ app.put('/completed', async (req, res) => {
     }
 
     // updating todo on mongodb
-    await Todos.update(
+    await Todos.updateOne(
         {_id: req.body.id},
         {completed: true}
     )
 
     res.json({message: "Todo marked as completed"})
+})
+
+app.listen(3000, () => {
+    console.log("App is listening on port 3000!")
 })

@@ -13,7 +13,7 @@ const zod = require('zod')
 
 const createTodoSchema = zod.object({
     title: zod.string(),
-    desription: zod.string()
+    description: zod.string()
 })
 
 const updateTodoSchema = zod.object({
