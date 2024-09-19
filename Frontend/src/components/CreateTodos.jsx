@@ -17,7 +17,6 @@ export function CreateTodo() {
                 setDescription(newDescription)
             }}/> <br />
 
-
             <button onClick={() => {
                 fetch("http://localhost:3000/todos", {
                     method: "POST",

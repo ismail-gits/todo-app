@@ -1,4 +1,3 @@
-import { useState } from "react"
 import "./Todos.css"
 
 export function Todos({todos}) {
@@ -19,14 +18,34 @@ export function Todos({todos}) {
                         }
                     })
                     .then(async (response) => {
-                        const json = response.json()
+                        const json = await response.json()
                         alert("Todo Updated!")
                     })
                     .catch((err) => {
                         console.log(err)
-                        alert("Todo Update failed")
+                        alert("Unable to update Todo")
                     })
-                }} id="button">{todo.completed ? "Completed!" : "Mark as Completed"}</button>
+                }} className="button">{todo.completed ? "Completed!" : "Mark as Complete"}</button>
+
+                <button onClick={() => {
+                    fetch("http://localhost:3000/removeTodo", {
+                        method: "DELETE",
+                        body: JSON.stringify({
+                            id: todo._id
+                        }),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    .then(async (response) => {
+                        const json = await response.json()
+                        alert("Todo removed!")
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        alert("Unable to remove Todo")
+                    })
+                }} className="button">Remove</button>
             </div>
         })}
     </div>

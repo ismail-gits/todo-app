@@ -15,7 +15,6 @@ app.use(cors({
 app.post('/todos', async (req, res) => {
     // Input validation using zod
     const input = req.body
-    console.log(req.body)
     const inputValidation = createTodoSchema.safeParse(input)
 
     if (!inputValidation.success) {
@@ -42,13 +41,12 @@ app.get('/todos', async (req, res) => {
 })
 
 app.put('/completed', async (req, res) => {
-    console.log("hello there")
-
     // Input validation using zod
     const inputValidation = updateTodoSchema.safeParse(req.body)
 
     if (!inputValidation.success) {
-        return res.status(400).json({message: "Invalid inputs"})
+        console.log(inputValidation.error.errors)
+        return res.status(400).json({message: "Invalid id"})
     }
 
     // updating todo on mongodb
@@ -58,6 +56,21 @@ app.put('/completed', async (req, res) => {
     )
 
     res.json({message: "Todo marked as completed"})
+})
+
+app.delete('/removeTodo', async (req, res) => {
+    // Input validation using zod
+    const inputValidation = updateTodoSchema.safeParse(req.body)
+
+    if (!inputValidation.success) {
+        console.log(inputValidation.error.errors)
+        return res.status(400).json({message: "Invalid id"})
+    }
+
+    // delete todo from mongodb
+    await Todos.findByIdAndDelete(req.body.id)
+
+    res.json({message: "Todo removed"})
 })
 
 app.listen(3000, () => {
