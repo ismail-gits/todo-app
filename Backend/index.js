@@ -50,10 +50,15 @@ app.put('/completed', async (req, res) => {
     }
 
     // updating todo on mongodb
-    await Todos.updateOne(
-        {_id: req.body.id},
-        {completed: true}
-    )
+    // await Todos.updateOne(
+    //     {_id: req.body.id},
+    //     {completed: true}
+    // )
+
+    // Another way of updateing todo on mongodb
+    await Todos.findByIdAndUpdate(req.body.id, {
+        completed: true
+    })
 
     res.json({message: "Todo marked as completed"})
 })
