@@ -8,6 +8,8 @@ const app = express()
 app.use(express.json())
 
 // leave it empty to allow from everywhere
+// cors = Cross Origin Resource Sharing
+// 5173 => port used by Vite
 app.use(cors({
     origin: "http://localhost:5173"
 }))
